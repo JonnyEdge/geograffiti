@@ -1,19 +1,13 @@
 import React from 'react';
 import {
-	View,
-	Text,
+  View,
+  Text,
 } from 'react-native';
 
-export default class AddScreen extends React.Component {
-
-	render() {
-		return (
-			<View>
-				<Text>
-					This is the Add screen!
-				</Text>
-			</View>
-		)
-	}
-
-};
+export default () => (
+  <View>
+    <Text>
+			This is the Add screen!
+    </Text>
+  </View>
+);
