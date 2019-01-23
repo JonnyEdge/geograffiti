@@ -1,16 +1,17 @@
 import React from 'react';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
-import { Platform } from 'react-native';
 import TabBarIcon from '../components/TabBarIcon';
 
-import HomeScreen from '../screens/HomeScreen';
+import DiscoverScreen from '../screens/DiscoverScreen';
+import AddScreen from '../screens/AddScreen';
+import MapScreen from '../screens/MapScreen';
 
-const HomeStack = createStackNavigator({
-    Home: HomeScreen,
+const DiscoverStack = createStackNavigator({
+    Discover: DiscoverScreen,
 });
 
-HomeStack.navigationOptions = {
-    tabBarLabel: 'Home',
+DiscoverStack.navigationOptions = {
+    tabBarLabel: 'Discover',
     tabBarIcon: ({ focused }) => (
     <TabBarIcon 
     focused = {focused}
@@ -19,7 +20,37 @@ HomeStack.navigationOptions = {
   ),
 };
 
+const AddStack = createStackNavigator({
+  Add: AddScreen,
+})
+
+AddStack.navigationOptions = {
+  tabBarLabel: 'Add',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon 
+    focused = {focused}
+    name = "ios-airplane"
+    />
+  ),
+};
+
+const MapStack = createStackNavigator({
+  Map: MapScreen,
+})
+
+MapStack.navigationOptions = {
+  tabBarLabel: 'Map',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon 
+    focused = {focused}
+    name = "ios-airplane"
+    />
+  ),
+};
+
 export default createBottomTabNavigator({
-    HomeStack,
+    AddStack,
+    DiscoverStack,
+    MapStack
 });
 

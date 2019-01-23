@@ -1,16 +1,16 @@
 import React from 'react';
 import {
 	View,
-	Text
+	Text,
 } from 'react-native';
 
-export default class HomeScreen extends React.Component {
+export default class DiscoverScreen extends React.Component {
 
 	render() {
 		return (
 			<View>
 				<Text>
-					This is the home screen!
+					This is the Discover screen!
 				</Text>
 			</View>
 		)
