@@ -39,9 +39,8 @@ AddStack.navigationOptions = {
 };
 
 const MapStack = createStackNavigator({
-  Map: (screenProps) => {
-    console.log(screenProps);
-    return <MapScreen location={JSON.stringify(screenProps.location)} />;
+  Map: (props) => {
+    return <MapScreen location={props.screenProps.location} />;
   },
 });
 
