@@ -1,13 +1,18 @@
 import React from 'react';
 import {
-  View,
-  Text,
-} from 'react-native';
+  MapView,
+} from 'expo';
 
-export default () => (
-  <View>
-    <Text>
-      This is the Map screen!
-    </Text>
-  </View>
-);
+export default (screenProps) => {
+  return (
+    <MapView
+      style={{ flex: 1 }}
+      initialRegion={{
+        latitude: parseFloat(screenProps.location.latitude),
+        longitude: parseFloat(screenProps.location.longitude),
+        latitudeDelta: 0.0043,
+        longitudeDelta: 0.0034,
+      }}
+    />
+  );
+};

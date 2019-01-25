@@ -7,7 +7,7 @@ import {
 export default () => (
   <View>
     <Text>
-			This is the Add screen!
+      This is the Add screen!
     </Text>
   </View>
 );
