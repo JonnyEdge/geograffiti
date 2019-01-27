@@ -9,6 +9,7 @@ import {
   ImagePicker,
   Permissions,
 } from 'expo';
+import moment from 'moment';
 
 const styles = StyleSheet.create({
   container: {
@@ -51,14 +52,15 @@ class AddScreen extends React.Component {
           latitude: image.exif.GPSLatitude,
           longitude: image.exif.GPSLongitude,
           url: image.uri,
+          time: new Date().getTime(),
         },
       });
-      console.log(this.state.image);
+      console.log(this.state.image.time);
     }
   };
 
   uploadImage = () => {
-    console.log(this.state);
+    console.log(this.state.image.time);
   };
 
   render() {
