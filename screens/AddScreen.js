@@ -57,9 +57,9 @@ class AddScreen extends React.Component {
     }
   };
 
-  uploadImage() {
+  uploadImage = () => {
     console.log(this.state);
-  }
+  };
 
   render() {
     return (
