@@ -2,7 +2,8 @@ import React from 'react';
 import {
   StyleSheet,
   View,
-  Text,
+  Button,
+  Image,
 } from 'react-native';
 import {
   ImagePicker,
@@ -26,23 +27,64 @@ class AddScreen extends React.Component {
         longitude: null,
         time: null,
         url: null,
-      }
+      },
     };
   }
 
+  componentDidMount() {
+    this._cameraPermission();
+  }
+
+  _cameraPermission = async () => {
+    await Permissions.askAsync(Permissions.CAMERA_ROLL);
+  };
+
   chooseImage = async () => {
-    const status = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    if (status === 'granted') {
-//      const image = await ImagePicker
+    const image = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: 'Images',
+      exif: true,
+      base6: true,
+    });
+    if (!image.cancelled) {
+      this.setState({
+        image: {
+          latitude: image.exif.GPSLatitude,
+          longitude: image.exif.GPSLongitude,
+          url: image.uri,
+        },
+      });
+      console.log(this.state.image);
     }
+  };
+
+  uploadImage() {
+    console.log(this.state);
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>
-          This is the Add screen!
-        </Text>
+        { this.state.image.url && (
+        <React.Fragment>
+          <Image
+            source={{ uri: this.state.image.url }}
+            style={{
+              width: 500,
+              height: 500,
+            }}
+          />
+          <Button
+            onPress={this.uploadImage}
+            title="Upload Image"
+          />
+        </React.Fragment>
+        )}
+        { !this.state.image.url && (
+          <Button
+            onPress={this.chooseImage}
+            title="Choose Image"
+          />
+        )}
       </View>
     );
   }
