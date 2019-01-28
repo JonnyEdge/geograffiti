@@ -9,7 +9,8 @@ import {
   ImagePicker,
   Permissions,
 } from 'expo';
-import moment from 'moment';
+import Axios from 'axios';
+import Config from 'react-native-config';
 
 const styles = StyleSheet.create({
   container: {
@@ -55,12 +56,28 @@ class AddScreen extends React.Component {
           time: new Date().getTime(),
         },
       });
-      console.log(this.state.image.time);
     }
   };
 
   uploadImage = () => {
-    console.log(this.state.image.time);
+    const token = Config.CREDENTIALS;
+    const formData = new FormData();
+    const image = {
+      uri: this.state.image.url,
+      type: 'image/jpeg',
+      name: 'photo.jpg',
+    };
+    formData.append('imageField', image);
+    formData.append('lat', this.state.image.latitude);
+    formData.append('lon', this.state.image.longitude);
+    formData.append('time', this.state.image.time);
+    const axiosConfig = {
+      headers: {
+        Authorization: token,
+        'Content-Type': 'multipart/form-data',
+      },
+    };
+    Axios.post('http://geo-graffiti-api.herokuapp.com/images', formData, axiosConfig);
   };
 
   render() {
