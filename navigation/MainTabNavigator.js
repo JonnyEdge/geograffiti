@@ -19,7 +19,7 @@ DiscoverStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name="ios-airplane"
+      name="ios-search"
     />
   ),
 };
@@ -33,14 +33,18 @@ AddStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name="ios-airplane"
+      name="ios-camera"
     />
   ),
 };
 
 const MapStack = createStackNavigator({
   Map: (props) => {
-    return <MapScreen location={props.screenProps.location} />;
+    return (
+      <MapScreen
+        location={props.screenProps.location}
+      />
+    );
   },
 });
 
@@ -49,7 +53,7 @@ MapStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name="ios-airplane"
+      name="ios-map"
     />
   ),
 };

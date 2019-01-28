@@ -6,6 +6,6 @@ export default (props) => (
     name={props.name}
     size={26}
     style={{ marginBottom: -3 }}
-    color={'red'}
+    color={'grey'}
   />
 );

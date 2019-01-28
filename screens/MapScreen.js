@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   MapView,
-//  Location,
 } from 'expo';
 
 class MapScreen extends React.Component {
@@ -16,21 +15,6 @@ class MapScreen extends React.Component {
         longitudeDelta: 0.0034,
       },
     };
-  }
-
-  componentDidMount() {
-    // Location.watchPositionAsync({
-    //   distanceInterval: 10,
-    //   accuracy: 6,
-    // }, (location) => {
-    //   console.log(location);
-    //   this.setState({
-    //     region: {
-    //       latitude: parseFloat(location.coords.latitude),
-    //       longitude: parseFloat(location.coords.longitude),
-    //     },
-    //   });
-    // });
   }
 
   _handleRegionChange = mapRegion => {
