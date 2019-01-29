@@ -10,8 +10,11 @@ import {
   Permissions,
 } from 'expo';
 import Axios from 'axios';
-import Config from 'react-native-config';
 
+import {
+  server,
+  credentials,
+} from '../config';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -45,7 +48,6 @@ class AddScreen extends React.Component {
     const image = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: 'Images',
       exif: true,
-      base6: true,
     });
     if (!image.cancelled) {
       this.setState({
@@ -60,24 +62,25 @@ class AddScreen extends React.Component {
   };
 
   uploadImage = () => {
-    const token = Config.CREDENTIALS;
     const formData = new FormData();
     const image = {
       uri: this.state.image.url,
       type: 'image/jpeg',
       name: 'photo.jpg',
     };
-    formData.append('imageField', image);
+    formData.append('image', image);
     formData.append('lat', this.state.image.latitude);
     formData.append('lon', this.state.image.longitude);
     formData.append('time', this.state.image.time);
     const axiosConfig = {
       headers: {
-        Authorization: token,
+        Authorizer: credentials,
         'Content-Type': 'multipart/form-data',
       },
     };
-    Axios.post('http://geo-graffiti-api.herokuapp.com/images', formData, axiosConfig);
+    Axios.post(`${server}/images`, formData, axiosConfig)
+      .then(response => console.log(response))
+      .catch(error => console.log(error));
   };
 
   render() {
@@ -88,13 +91,17 @@ class AddScreen extends React.Component {
           <Image
             source={{ uri: this.state.image.url }}
             style={{
-              width: 500,
-              height: 500,
+              width: 400,
+              height: 400,
             }}
           />
           <Button
             onPress={this.uploadImage}
             title="Upload Image"
+          />
+          <Button
+            onPress={this.chooseImage}
+            title="Edit"
           />
         </React.Fragment>
         )}
