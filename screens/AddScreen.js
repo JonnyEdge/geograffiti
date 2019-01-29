@@ -4,6 +4,7 @@ import {
   View,
   Button,
   Image,
+  Text,
 } from 'react-native';
 import {
   ImagePicker,
@@ -15,11 +16,20 @@ import {
   server,
   credentials,
 } from '../config';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  statusMessage: {
+    color: 'green',
+    backgroundColor: 'lime',
+  },
+  errorMessage: {
+    color: 'red',
+    backgroundColor: 'pink',
   },
 });
 
@@ -33,6 +43,8 @@ class AddScreen extends React.Component {
         time: null,
         url: null,
       },
+      statusMessage: null,
+      errorMessage: null,
     };
   }
 
@@ -79,13 +91,53 @@ class AddScreen extends React.Component {
       },
     };
     Axios.post(`${server}/images`, formData, axiosConfig)
-      .then(response => console.log(response))
-      .catch(error => console.log(error));
+      .then(res => {
+        if (res.status === 201) {
+          this.setState({
+            image: {
+              lat: null,
+              lon: null,
+              time: null,
+              url: null,
+            },
+            statusMessage: 'Image Uploaded',
+          });
+        }
+      })
+      .catch(error => {
+        this.setState({
+          image: {
+            lat: null,
+            lon: null,
+            time: null,
+            url: null,
+          },
+          errorMessage: error.message,
+        });
+      });
   };
 
   render() {
     return (
       <View style={styles.container}>
+        {
+          this.state.statusMessage && (
+            <Text
+              style={styles.statusMessage}
+            >
+              {this.state.statusMessage}
+            </Text>
+          )
+        }
+        {
+          this.state.errorMessage && (
+            <Text
+              style={styles.errorMessage}
+            >
+              {this.state.errorMessage}
+            </Text>
+          )
+        }
         { this.state.image.url && (
         <React.Fragment>
           <Image
