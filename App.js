@@ -2,7 +2,6 @@ import React from 'react';
 import {
   StyleSheet,
   View,
-  Text,
 } from 'react-native';
 import {
   Permissions,
@@ -38,9 +37,6 @@ export default class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <View style={styles.statusBar}>
-          <Text style={styles.logo}>Geo-Graffiti</Text>
-        </View>
         <View style={styles.container}>
           <MainTabNavigator
             screenProps={{
