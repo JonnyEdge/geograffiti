@@ -129,7 +129,10 @@ class AddScreen extends React.Component {
       <View style={styles.container}>
         {
           this.state.working && (
-            <ActivityIndicator />
+            <React.Fragment>
+              <Text>Uploading...</Text>
+              <ActivityIndicator />
+            </React.Fragment>
           )
         }
         {
