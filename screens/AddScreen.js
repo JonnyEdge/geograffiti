@@ -5,6 +5,7 @@ import {
   Button,
   Image,
   Text,
+  ActivityIndicator,
 } from 'react-native';
 import {
   ImagePicker,
@@ -37,6 +38,7 @@ class AddScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      working: false,
       image: {
         latitude: null,
         longitude: null,
@@ -74,6 +76,9 @@ class AddScreen extends React.Component {
   };
 
   uploadImage = () => {
+    this.setState({
+      working: true,
+    });
     const formData = new FormData();
     const image = {
       uri: this.state.image.url,
@@ -94,6 +99,7 @@ class AddScreen extends React.Component {
       .then(res => {
         if (res.status === 201) {
           this.setState({
+            working: false,
             image: {
               lat: null,
               lon: null,
@@ -106,6 +112,7 @@ class AddScreen extends React.Component {
       })
       .catch(error => {
         this.setState({
+          working: false,
           image: {
             lat: null,
             lon: null,
@@ -121,7 +128,15 @@ class AddScreen extends React.Component {
     return (
       <View style={styles.container}>
         {
-          this.state.statusMessage && (
+          this.state.working && (
+            <React.Fragment>
+              <Text>Uploading...</Text>
+              <ActivityIndicator />
+            </React.Fragment>
+          )
+        }
+        {
+          this.state.statusMessage && !this.state.working && (
             <Text
               style={styles.statusMessage}
             >
@@ -130,7 +145,7 @@ class AddScreen extends React.Component {
           )
         }
         {
-          this.state.errorMessage && (
+          this.state.errorMessage && !this.state.working && (
             <Text
               style={styles.errorMessage}
             >
@@ -138,7 +153,7 @@ class AddScreen extends React.Component {
             </Text>
           )
         }
-        { this.state.image.url && (
+        { this.state.image.url && !this.state.working && (
         <React.Fragment>
           <Image
             source={{ uri: this.state.image.url }}
@@ -157,7 +172,7 @@ class AddScreen extends React.Component {
           />
         </React.Fragment>
         )}
-        { !this.state.image.url && (
+        { !this.state.image.url && !this.state.working && (
           <Button
             onPress={this.chooseImage}
             title="Choose Image"
