@@ -24,7 +24,12 @@ export default class App extends React.Component {
 
   componentDidMount() {
     this._getLocationAsync();
+    this._cameraPermission();
   }
+
+  _cameraPermission = async () => {
+    await Permissions.askAsync(Permissions.CAMERA_ROLL);
+  };
 
   _getLocationAsync = async () => {
     const { status } = await Permissions.askAsync(Permissions.LOCATION);
