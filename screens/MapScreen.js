@@ -2,6 +2,10 @@ import React from 'react';
 import {
   MapView,
 } from 'expo';
+import {
+  Text,
+  ActivityIndicator,
+} from 'react-native';
 import Axios from 'axios';
 import { server } from '../config';
 
@@ -10,7 +14,7 @@ class MapScreen extends React.Component {
     super(props);
 
     this.state = {
-      markers: [],
+      markers: null,
       region: {
         latitude: parseFloat(this.props.location.latitude),
         longitude: parseFloat(this.props.location.longitude),
@@ -20,20 +24,12 @@ class MapScreen extends React.Component {
     };
   }
 
-  componentWillMount() {
-    if (!this.state.region.latitude) {
-      console.log('not ready yet');
-    }
-  }
-
   componentDidMount() {
-    console.log(server);
     Axios.get(`${server}/images`)
       .then(res => {
         this.setState({
           markers: res.body,
         });
-        console.log(res);
       });
   }
 
@@ -43,7 +39,7 @@ class MapScreen extends React.Component {
 
   render() {
     return (
-      this.state.region.latitude && (
+      this.state.markers ? (
         <MapView
           style={{ flex: 1 }}
           region={this.state.region}
@@ -52,6 +48,11 @@ class MapScreen extends React.Component {
           onRegionChangeComplete={this._handleRegionChange}
           provider="google"
         />
+      ) : (
+        <React.Fragment>
+          <Text>Working...</Text>
+          <ActivityIndicator />
+        </React.Fragment>
       )
     );
   }

@@ -17,14 +17,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  header: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'red',
-    fontSize: 40,
-  },
+  // header: {
+  //   flex: 1,
+  //   flexDirection: 'row',
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  //   backgroundColor: 'red',
+  //   fontSize: 40,
+  // },
 });
 
 export default class App extends React.Component {
@@ -53,6 +53,7 @@ export default class App extends React.Component {
 
   _getFontAsync = async () => {
     await Font.loadAsync({
+      // eslint-disable-next-line global-require
       Lobster: require('./assets/fonts/Lobster-Regular.ttf'),
     });
     this.setState({ fontLoaded: true });
