@@ -5,9 +5,19 @@ import {
 import {
   Text,
   ActivityIndicator,
+  StyleSheet,
+  View,
 } from 'react-native';
 import Axios from 'axios';
 import { server } from '../config';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 class MapScreen extends React.Component {
   constructor(props) {
@@ -28,7 +38,7 @@ class MapScreen extends React.Component {
     Axios.get(`${server}/images`)
       .then(res => {
         this.setState({
-          markers: res.body,
+          markers: res.data,
         });
       });
   }
@@ -47,12 +57,30 @@ class MapScreen extends React.Component {
           showsUserLocation
           onRegionChangeComplete={this._handleRegionChange}
           provider="google"
-        />
+        >
+          {/* <MapView.Marker
+            coordinate={{
+              latitude: parseFloat(this.state.markers[0].lat),
+              longitude: parseFloat(this.state.markers[0].lon) * -1,
+            }}
+          /> */}
+          {
+            this.state.markers.map(marker => (
+              <MapView.Marker
+                key={marker._id}
+                coordinate={{
+                  latitude: parseFloat(marker.lat),
+                  longitude: parseFloat(marker.lon),
+                }}
+              />
+            ))
+          }
+        </MapView>
       ) : (
-        <React.Fragment>
+        <View style={styles.container}>
           <Text>Working...</Text>
           <ActivityIndicator />
-        </React.Fragment>
+        </View>
       )
     );
   }

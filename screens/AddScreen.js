@@ -91,7 +91,7 @@ class AddScreen extends React.Component {
       this.setState({
         image: {
           latitude: image.exif.GPSLatitude,
-          longitude: image.exif.GPSLongitude,
+          longitude: image.exif.GPSLongitudeRef === 'W' ? image.exif.GPSLongitude * -1 : image.exif.GPSLongitude,
           url: image.uri,
           time: new Date().getTime(),
         },
