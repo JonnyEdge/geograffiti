@@ -60,6 +60,7 @@ export default class App extends React.Component {
         {
           this.state.fontLoaded ? (
             <Header
+            // containerStyle={{height: 56}}
             backgroundColor='#ffffff'
             // leftComponent={{ icon: 'menu', color: '#000000' }} 
             centerComponent={{ 
