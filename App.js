@@ -3,7 +3,9 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import { Header } from 'react-native-elements';
+// import {
+//   Header
+// } from 'react-native-elements';
 import {
   Permissions,
   Location,
@@ -29,7 +31,7 @@ const styles = StyleSheet.create({
 
 export default class App extends React.Component {
   state ={
-    fontLoaded: false,
+    // fontLoaded: false,
     location: {},
   };
 
@@ -56,41 +58,41 @@ export default class App extends React.Component {
       // eslint-disable-next-line global-require
       Lobster: require('./assets/fonts/Lobster-Regular.ttf'),
     });
-    this.setState({ fontLoaded: true });
+    // this.setState({ fontLoaded: true });
   };
 
   render() {
     return (
       <React.Fragment>
-        <View style={styles.header}>
+        {/* <View style={styles.header}>
           {
           this.state.fontLoaded ? (
             <Header
-            // containerStyle={{height: 56}}
-            backgroundColor='#ffffff'
-            // leftComponent={{ icon: 'menu', color: '#000000' }} 
-            centerComponent={{ 
-              text: 'GeoGraffiti', 
-              style: {
-                fontSize: 25,
-                paddingTop: 10,
-                fontFamily: 'Lobster'
-              },
-              backgroundColor="#ffffff"
-            // leftComponent={{ icon: 'menu', color: '#000000' }}
+              // containerStyle={{height: 56}}
+              backgroundColor='#ffffff'
+              // leftComponent={{ icon: 'menu', color: '#000000' }}
               centerComponent={{
                 text: 'GeoGraffiti',
                 style: {
                   fontSize: 25,
                   paddingTop: 10,
                   fontFamily: 'Lobster',
-                },
+                  backgroundColor="#ffffff",
+                }
               }}
-            // rightComponent={{ icon: 'home', color: '#000000' }}
+              // leftComponent={{ icon: 'menu', color: '#000000' }}
+                centerComponent={
+                  text: 'GeoGraffiti',
+                  style: {
+                    fontSize: 25,
+                    paddingTop: 10,
+                    fontFamily: 'Lobster',
+                  },
+                }
+              // rightComponent={{ icon: 'home', color: '#000000' }}
             />
           ) : null
-        }
-        </View>
+        </View> */}
         <View style={styles.container}>
           <MainTabNavigator
             screenProps={{
