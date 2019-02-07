@@ -18,13 +18,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   // header: {
-  // flex: 1,
-  //   // flexDirection: 'row',
-  //   // alignItems: 'center',
-  //   // justifyContent: 'center',
+  //   flex: 1,
+  //   flexDirection: 'row',
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
   //   backgroundColor: 'red',
-  //   fontSize: 40
-  // }
+  //   fontSize: 40,
+  // },
 });
 
 export default class App extends React.Component {
@@ -35,8 +35,13 @@ export default class App extends React.Component {
 
   componentDidMount() {
     this._getLocationAsync();
+    this._cameraPermission();
     this._getFontAsync();
   }
+
+  _cameraPermission = async () => {
+    await Permissions.askAsync(Permissions.CAMERA_ROLL);
+  };
 
   _getLocationAsync = async () => {
     const { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -48,16 +53,17 @@ export default class App extends React.Component {
 
   _getFontAsync = async () => {
     await Font.loadAsync({
-      'Lobster': require('./assets/fonts/Lobster-Regular.ttf')
-    })
-    this.setState({ fontLoaded: true })
-  }
+      // eslint-disable-next-line global-require
+      Lobster: require('./assets/fonts/Lobster-Regular.ttf'),
+    });
+    this.setState({ fontLoaded: true });
+  };
 
   render() {
-      return (
+    return (
       <React.Fragment>
         <View style={styles.header}>
-        {
+          {
           this.state.fontLoaded ? (
             <Header
             // containerStyle={{height: 56}}
@@ -70,6 +76,15 @@ export default class App extends React.Component {
                 paddingTop: 10,
                 fontFamily: 'Lobster'
               },
+              backgroundColor="#ffffff"
+            // leftComponent={{ icon: 'menu', color: '#000000' }}
+              centerComponent={{
+                text: 'GeoGraffiti',
+                style: {
+                  fontSize: 25,
+                  paddingTop: 10,
+                  fontFamily: 'Lobster',
+                },
               }}
             // rightComponent={{ icon: 'home', color: '#000000' }}
             />
@@ -85,5 +100,5 @@ export default class App extends React.Component {
         </View>
       </React.Fragment>
     );
-    }
+  }
 }
