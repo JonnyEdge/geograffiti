@@ -126,6 +126,12 @@ class AddScreen extends React.Component {
             statusMessage: 'Image Uploaded',
           });
         }
+        this.props.navigation.navigate('Map', {
+          location: {
+            latitude: res.data.lat,
+            longitude: res.data.lon,
+          },
+        });
       })
       .catch(error => {
         this._resetImageState();

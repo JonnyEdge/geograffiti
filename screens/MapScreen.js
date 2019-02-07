@@ -47,6 +47,10 @@ class MapScreen extends React.Component {
     this.setState({ region: mapRegion });
   };
 
+  handleMarkerClick = () => {
+    this.props.navigation.navigate('Discover');
+  };
+
   render() {
     return (
       this.state.markers ? (
@@ -58,12 +62,6 @@ class MapScreen extends React.Component {
           onRegionChangeComplete={this._handleRegionChange}
           provider="google"
         >
-          {/* <MapView.Marker
-            coordinate={{
-              latitude: parseFloat(this.state.markers[0].lat),
-              longitude: parseFloat(this.state.markers[0].lon) * -1,
-            }}
-          /> */}
           {
             this.state.markers.map(marker => (
               <MapView.Marker
@@ -72,6 +70,7 @@ class MapScreen extends React.Component {
                   latitude: parseFloat(marker.lat),
                   longitude: parseFloat(marker.lon),
                 }}
+                onPress={this.handleMarkerClick}
               />
             ))
           }
