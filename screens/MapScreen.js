@@ -48,7 +48,7 @@ class MapScreen extends React.Component {
   };
 
   handleMarkerClick = () => {
-    console.log('The System Works!');
+    this.props.navigation.navigate('Discover');
   };
 
   render() {

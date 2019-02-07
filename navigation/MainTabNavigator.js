@@ -25,7 +25,13 @@ DiscoverStack.navigationOptions = {
 };
 
 const AddStack = createStackNavigator({
-  Add: AddScreen,
+  Add: (props) => {
+    return (
+      <AddScreen
+        navigation={props.navigation}
+      />
+    );
+  },
 });
 
 AddStack.navigationOptions = {
@@ -43,6 +49,7 @@ const MapStack = createStackNavigator({
     return (
       <MapScreen
         location={props.screenProps.location}
+        navigation={props.navigation}
       />
     );
   },
