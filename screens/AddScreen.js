@@ -50,6 +50,10 @@ class AddScreen extends React.Component {
     };
   }
 
+  static navigationOptions = {
+    title: 'GeoGraffiti',
+  };
+
   componentDidMount() {
     this._cameraPermission();
   }

@@ -19,6 +19,10 @@ export default class DiscoverScreen extends React.Component {
     images: [],
   };
 
+  static navigationOptions = {
+    title: 'GeoGraffiti',
+  };
+
   componentDidMount() {
     Axios.get('https://geo-graffiti-api.herokuapp.com/images')
       .then((response) => {
