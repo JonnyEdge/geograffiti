@@ -66,6 +66,16 @@ export default class App extends React.Component {
           {
           this.state.fontLoaded ? (
             <Header
+            // containerStyle={{height: 56}}
+            backgroundColor='#ffffff'
+            // leftComponent={{ icon: 'menu', color: '#000000' }} 
+            centerComponent={{ 
+              text: 'GeoGraffiti', 
+              style: {
+                fontSize: 25,
+                paddingTop: 10,
+                fontFamily: 'Lobster'
+              },
               backgroundColor="#ffffff"
             // leftComponent={{ icon: 'menu', color: '#000000' }}
               centerComponent={{
