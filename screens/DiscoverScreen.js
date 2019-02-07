@@ -50,11 +50,3 @@ export default class DiscoverScreen extends React.Component {
     );
   }
 }
-
-// export default () => (
-//   <View style={styles.container}>
-//     <Text>
-//       This is the Discover screen!
-//     </Text>
-//   </View>
-// );

@@ -17,6 +17,10 @@ class MapScreen extends React.Component {
     };
   }
 
+  static navigationOptions = {
+    title: 'GeoGraffiti',
+  };
+
   _handleRegionChange = mapRegion => {
     this.setState({ region: mapRegion });
   };

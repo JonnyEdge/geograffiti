@@ -10,23 +10,13 @@ import {
   Font,
 } from 'expo';
 import MainTabNavigator from './navigation/MainTabNavigator';
-import HeaderIcon from './components/HeaderIcon';
-import Icon from 'react-native-vector-icons/FontAwesome'
 
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-  },
-  // header: {
-  // flex: 1,
-  //   // flexDirection: 'row',
-  //   // alignItems: 'center',
-  //   // justifyContent: 'center',
-  //   backgroundColor: 'red',
-  //   fontSize: 40
-  // }
+  }
 });
 
 export default class App extends React.Component {
@@ -58,29 +48,6 @@ export default class App extends React.Component {
   render() {
       return (
       <React.Fragment>
-        {/* <View style={styles.header}>
-        {
-          this.state.fontLoaded ? (
-            <Header
-            containerStyle={{height: 50}}
-            backgroundColor='#ffffff'
-            centerComponent={{ 
-              // text: 'GeoGraffiti',
-              icon: 'star',
-              style: {
-                size: 5,
-              }, 
-              // style: {
-              //   fontSize: 2,
-              //   paddingTop: 0,
-              //   marginTop: 0,
-              //   // fontFamily: 'Lobster',
-              // },
-              }}
-            />
-          ) : null
-        }
-        </View> */}
         <View style={styles.container}>
           <MainTabNavigator
             screenProps={{
