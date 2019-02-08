@@ -27,8 +27,13 @@ export default class App extends React.Component {
 
   componentDidMount() {
     this._getLocationAsync();
+    this._cameraPermission();
     this._getFontAsync();
   }
+
+  _cameraPermission = async () => {
+    await Permissions.askAsync(Permissions.CAMERA_ROLL);
+  };
 
   _getLocationAsync = async () => {
     const { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -40,13 +45,14 @@ export default class App extends React.Component {
 
   _getFontAsync = async () => {
     await Font.loadAsync({
-      'Lobster': require('./assets/fonts/Lobster-Regular.ttf')
-    })
-    this.setState({ fontLoaded: true })
-  }
+      // eslint-disable-next-line global-require
+      Lobster: require('./assets/fonts/Lobster-Regular.ttf'),
+    });
+    this.setState({ fontLoaded: true });
+  };
 
   render() {
-      return (
+    return (
       <React.Fragment>
         <View style={styles.container}>
           <MainTabNavigator
@@ -57,5 +63,5 @@ export default class App extends React.Component {
         </View>
       </React.Fragment>
     );
-    }
+  }
 }

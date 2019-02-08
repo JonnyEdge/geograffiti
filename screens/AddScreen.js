@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import {
   ImagePicker,
-  Permissions,
 } from 'expo';
 import Axios from 'axios';
 
@@ -26,11 +25,17 @@ const styles = StyleSheet.create({
   },
   statusMessage: {
     color: 'green',
-    backgroundColor: 'lime',
+    padding: 10,
+    borderWidth: 2,
+    borderColor: 'lime',
+    borderRadius: 10,
   },
   errorMessage: {
     color: 'red',
-    backgroundColor: 'pink',
+    padding: 10,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: 'pink',
   },
 });
 
@@ -54,15 +59,38 @@ class AddScreen extends React.Component {
     title: 'GeoGraffiti',
   };
 
-  componentDidMount() {
-    this._cameraPermission();
-  }
+  // componentDidMount() {
+  //   this._cameraPermission();
+  // }
+  
+  _resetImageState = () => {
+    this.setState({
+      image: {
+        lat: null,
+        lon: null,
+        time: null,
+        url: null,
+      },
+    });
+  };
 
-  _cameraPermission = async () => {
-    await Permissions.askAsync(Permissions.CAMERA_ROLL);
+  _renderLoading = () => {
+    this.setState({
+      working: true,
+    });
+  };
+
+  _unrenderLoading = () => {
+    this.setState({
+      working: false,
+    });
   };
 
   chooseImage = async () => {
+    this.setState({
+      errorMessage: null,
+      statusMessage: null,
+    });
     const image = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: 'Images',
       exif: true,
@@ -70,8 +98,8 @@ class AddScreen extends React.Component {
     if (!image.cancelled) {
       this.setState({
         image: {
-          latitude: image.exif.GPSLatitude,
-          longitude: image.exif.GPSLongitude,
+          latitude: image.exif.GPSLatitudeRef === 'S' ? image.exif.GPSLatitude * -1 : image.exif.GPSLatitude,
+          longitude: image.exif.GPSLongitudeRef === 'W' ? image.exif.GPSLongitude * -1 : image.exif.GPSLongitude,
           url: image.uri,
           time: new Date().getTime(),
         },
@@ -80,14 +108,12 @@ class AddScreen extends React.Component {
   };
 
   uploadImage = () => {
-    this.setState({
-      working: true,
-    });
+    this._renderLoading();
     const formData = new FormData();
     const image = {
       uri: this.state.image.url,
       type: 'image/jpeg',
-      name: 'photo.jpg',
+      name: `${Math.round(this.state.image.time + this.state.image.latitude + this.state.image.longitude)}`,
     };
     formData.append('image', image);
     formData.append('lat', this.state.image.latitude);
@@ -102,27 +128,17 @@ class AddScreen extends React.Component {
     Axios.post(`${server}/images`, formData, axiosConfig)
       .then(res => {
         if (res.status === 201) {
+          this._unrenderLoading();
+          this._resetImageState();
           this.setState({
-            working: false,
-            image: {
-              lat: null,
-              lon: null,
-              time: null,
-              url: null,
-            },
             statusMessage: 'Image Uploaded',
           });
         }
       })
       .catch(error => {
+        this._resetImageState();
+        this._unrenderLoading();
         this.setState({
-          working: false,
-          image: {
-            lat: null,
-            lon: null,
-            time: null,
-            url: null,
-          },
           errorMessage: error.message,
         });
       });
@@ -134,7 +150,7 @@ class AddScreen extends React.Component {
         {
           this.state.working && (
             <React.Fragment>
-              <Text>Uploading...</Text>
+              <Text>Working...</Text>
               <ActivityIndicator />
             </React.Fragment>
           )
