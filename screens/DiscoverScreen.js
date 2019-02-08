@@ -1,18 +1,9 @@
 import React from 'react';
 import Axios from 'axios';
 import {
-  StyleSheet,
   ScrollView,
 } from 'react-native';
 import ImageCard from '../components/ImageCard';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export default class DiscoverScreen extends React.Component {
   state ={
@@ -35,7 +26,7 @@ export default class DiscoverScreen extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <ScrollView>
+        <ScrollView pinchGestureEnabled minimumZoomScale={1.0} maximumZoomScale={2.0}>
           {this.state.images.map(image => (
             <ImageCard
               key={image._id}
