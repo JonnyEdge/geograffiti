@@ -6,7 +6,7 @@ const imageHeight = dimensions.height;
 const imageWidth = dimensions.width;
 
 export default (props) => (
-  console.log(props.url) || <Image
+  <Image
     style={{ width: imageWidth, height: imageHeight }}
     source={{ uri: props.url }}
   />

@@ -59,10 +59,6 @@ class AddScreen extends React.Component {
     title: 'GeoGraffiti',
   };
 
-  // componentDidMount() {
-  //   this._cameraPermission();
-  // }
-  
   _resetImageState = () => {
     this.setState({
       image: {
