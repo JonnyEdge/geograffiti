@@ -1,14 +1,14 @@
 import React from 'react';
 import {
-  Image,
-  Dimensions,
+  // Dimensions,
   View,
 } from 'react-native';
+import Image from 'react-native-image-progress';
 
-const dimensions = Dimensions.get('window');
+// const dimensions = Dimensions.get('window');
 // const imageHeight = Math.round(dimensions.width * 9 / 16);
-const imageHeight = dimensions.height;
-const imageWidth = dimensions.width;
+// const imageHeight = dimensions.height;
+// const imageWidth = dimensions.width;
 
 export default (props) => {
   return (

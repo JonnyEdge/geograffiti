@@ -2,6 +2,7 @@ import React from 'react';
 import {
   StyleSheet,
   View,
+  ActivityIndicator,
 } from 'react-native';
 // import {
 //   Header
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
 export default class App extends React.Component {
   state ={
     // fontLoaded: false,
-    location: {},
+    location: null,
   };
 
   componentDidMount() {
@@ -63,36 +64,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
-        {/* <View style={styles.header}>
-          {
-          this.state.fontLoaded ? (
-            <Header
-              // containerStyle={{height: 56}}
-              backgroundColor='#ffffff'
-              // leftComponent={{ icon: 'menu', color: '#000000' }}
-              centerComponent={{
-                text: 'GeoGraffiti',
-                style: {
-                  fontSize: 25,
-                  paddingTop: 10,
-                  fontFamily: 'Lobster',
-                  backgroundColor="#ffffff",
-                }
-              }}
-              // leftComponent={{ icon: 'menu', color: '#000000' }}
-                centerComponent={
-                  text: 'GeoGraffiti',
-                  style: {
-                    fontSize: 25,
-                    paddingTop: 10,
-                    fontFamily: 'Lobster',
-                  },
-                }
-              // rightComponent={{ icon: 'home', color: '#000000' }}
-            />
-          ) : null
-        </View> */}
+      this.state.location ? (
         <View style={styles.container}>
           <MainTabNavigator
             screenProps={{
@@ -100,7 +72,15 @@ export default class App extends React.Component {
             }}
           />
         </View>
-      </React.Fragment>
+      ) : (
+        <View
+          style={
+                styles.container
+              }
+        >
+          <ActivityIndicator />
+        </View>
+      )
     );
   }
 }

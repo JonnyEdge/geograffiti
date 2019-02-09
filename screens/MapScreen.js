@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import Axios from 'axios';
 import { server } from '../config';
+import { withNavigation } from 'react-navigation';
 
 const styles = StyleSheet.create({
   container: {
@@ -43,12 +44,16 @@ class MapScreen extends React.Component {
       });
   }
 
-  _handleRegionChange = mapRegion => {
-    this.setState({ region: mapRegion });
+  onPressMarker = (_, marker) => {
+    this.props.navigation.navigate('Image', {
+      lat: marker.lat,
+      lon: marker.lon,
+      image: marker.url,
+    });
   };
 
-  handleMarkerClick = () => {
-    this.props.navigation.navigate('Discover');
+  _handleRegionChange = mapRegion => {
+    this.setState({ region: mapRegion });
   };
 
   render() {
@@ -70,7 +75,10 @@ class MapScreen extends React.Component {
                   latitude: parseFloat(marker.lat),
                   longitude: parseFloat(marker.lon),
                 }}
-                onPress={this.handleMarkerClick}
+                onPress={event => {
+                  this.onPressMarker(event, marker);
+                }
+                }
               />
             ))
           }
@@ -85,4 +93,4 @@ class MapScreen extends React.Component {
   }
 }
 
-export default MapScreen;
+export default withNavigation(MapScreen);

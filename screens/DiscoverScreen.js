@@ -1,19 +1,19 @@
 import React from 'react';
 import Axios from 'axios';
 import {
-  // StyleSheet,
+  StyleSheet,
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
 import ImageCard from '../components/ImageCard';
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//   },
-// });
+const styles = StyleSheet.create({
+  images: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+});
 
 export default class DiscoverScreen extends React.Component {
   state ={
@@ -33,7 +33,9 @@ export default class DiscoverScreen extends React.Component {
     return (
       this.state.images ? (
         <React.Fragment>
-          <ScrollView>
+          <ScrollView
+            style={styles.images}
+          >
             {this.state.images.map(image => (
               <ImageCard
                 key={image._id}
@@ -48,7 +50,6 @@ export default class DiscoverScreen extends React.Component {
       ) : (
         <ActivityIndicator />
       )
-      
     );
   }
 }
