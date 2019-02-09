@@ -40,20 +40,8 @@ AddStack.navigationOptions = {
 };
 
 const MapStack = createStackNavigator({
-  Map: (props) => {
-    return (
-      <MapScreen
-        location={props.screenProps.location}
-      />
-    );
-  },
-  Image: (props) => {
-    return (
-      <ImageScreen
-        image={props.screenProps.image}
-      />
-    );
-  },
+  Map: MapScreen,
+  Image: ImageScreen,
   initialRouteName: 'Map',
 });
 
