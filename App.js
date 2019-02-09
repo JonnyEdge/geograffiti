@@ -16,15 +16,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-  },
-  // header: {
-  //   flex: 1,
-  //   flexDirection: 'row',
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  //   backgroundColor: 'red',
-  //   fontSize: 40,
-  // },
+  }
 });
 
 export default class App extends React.Component {
@@ -62,35 +54,6 @@ export default class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <View style={styles.header}>
-          {
-          this.state.fontLoaded ? (
-            <Header
-            // containerStyle={{height: 56}}
-            backgroundColor='#ffffff'
-            // leftComponent={{ icon: 'menu', color: '#000000' }} 
-            centerComponent={{ 
-              text: 'GeoGraffiti', 
-              style: {
-                fontSize: 25,
-                paddingTop: 10,
-                fontFamily: 'Lobster'
-              },
-              backgroundColor="#ffffff"
-            // leftComponent={{ icon: 'menu', color: '#000000' }}
-              centerComponent={{
-                text: 'GeoGraffiti',
-                style: {
-                  fontSize: 25,
-                  paddingTop: 10,
-                  fontFamily: 'Lobster',
-                },
-              }}
-            // rightComponent={{ icon: 'home', color: '#000000' }}
-            />
-          ) : null
-        }
-        </View>
         <View style={styles.container}>
           <MainTabNavigator
             screenProps={{

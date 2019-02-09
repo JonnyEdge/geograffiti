@@ -55,6 +55,10 @@ class AddScreen extends React.Component {
     };
   }
 
+  static navigationOptions = {
+    title: 'GeoGraffiti',
+  };
+
   _resetImageState = () => {
     this.setState({
       image: {
