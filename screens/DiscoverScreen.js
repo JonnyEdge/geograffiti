@@ -29,7 +29,7 @@ export default class DiscoverScreen extends React.Component {
   }
 
   _onRefresh = () => {
-    this.setState({refreshing: true})
+    this.setState({ refreshing: true });
     Axios.get('https://geo-graffiti-api.herokuapp.com/images')
       .then((response) => {
         this.setState({
@@ -37,13 +37,16 @@ export default class DiscoverScreen extends React.Component {
           refreshing: false,
         });
       });
-  }
+  };
 
   render() {
     return (
       this.state.images ? (
         <React.Fragment>
-          <ScrollView pinchGestureEnabled minimumZoomScale={1.0} maximumZoomScale={2.0}
+          <ScrollView
+            pinchGestureEnabled
+            minimumZoomScale={1.0}
+            maximumZoomScale={2.0}
             refreshControl={
               <RefreshControl refreshing={this.state.refreshing} onRefresh={this._onRefresh} />
             }

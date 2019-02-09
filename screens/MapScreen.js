@@ -25,12 +25,11 @@ const styles = StyleSheet.create({
 class MapScreen extends React.Component {
   constructor(props) {
     super(props);
-    const propLocation = props.navigation.getParam('location');
     this.state = {
       markers: null,
       region: {
-        latitude: propLocation ? propLocation.latitude : null,
-        longitude: propLocation ? propLocation.longitude : null,
+        latitude: null,
+        longitude: null,
         latitudeDelta: 0.0043,
         longitudeDelta: 0.0034,
       },
@@ -42,7 +41,7 @@ class MapScreen extends React.Component {
   };
 
   componentDidMount() {
-    this._getMarkers();
+    this._getLocationAsync();
   }
 
   onPressMarker = (_, marker) => {
@@ -65,6 +64,7 @@ class MapScreen extends React.Component {
           longitudeDelta: 0.0034,
         },
       });
+      this._getMarkers();
     }
   };
 
@@ -74,9 +74,6 @@ class MapScreen extends React.Component {
         this.setState({
           markers: res.data,
         });
-        if (!this.state.region) {
-          this._getLocationAsync();
-        }
       });
   };
 
