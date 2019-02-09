@@ -19,15 +19,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-  },
-  // header: {
-  //   flex: 1,
-  //   flexDirection: 'row',
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  //   backgroundColor: 'red',
-  //   fontSize: 40,
-  // },
+  }
 });
 
 export default class App extends React.Component {
@@ -65,6 +57,7 @@ export default class App extends React.Component {
   render() {
     return (
       this.state.location ? (
+      <React.Fragment>
         <View style={styles.container}>
           <MainTabNavigator
             screenProps={{

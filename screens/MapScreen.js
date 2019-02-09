@@ -35,6 +35,10 @@ class MapScreen extends React.Component {
     };
   }
 
+  static navigationOptions = {
+    title: 'GeoGraffiti',
+  };
+  
   componentDidMount() {
     Axios.get(`${server}/images`)
       .then(res => {

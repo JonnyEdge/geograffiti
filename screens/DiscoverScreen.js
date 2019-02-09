@@ -1,23 +1,18 @@
 import React from 'react';
 import Axios from 'axios';
 import {
-  StyleSheet,
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
 import ImageCard from '../components/ImageCard';
 
-const styles = StyleSheet.create({
-  images: {
-    flex: 1,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-});
-
 export default class DiscoverScreen extends React.Component {
   state ={
     images: null,
+  };
+
+  static navigationOptions = {
+    title: 'GeoGraffiti',
   };
 
   componentDidMount() {
@@ -31,33 +26,19 @@ export default class DiscoverScreen extends React.Component {
 
   render() {
     return (
-      this.state.images ? (
-        <React.Fragment>
-          <ScrollView
-            style={styles.images}
-          >
-            {this.state.images.map(image => (
-              <ImageCard
-                key={image._id}
-                url={image.url}
-                latitude={image.lat}
-                longitude={image.lon}
-                time={image.time}
-              />
-            ))}
-          </ScrollView>
-        </React.Fragment>
-      ) : (
-        <ActivityIndicator />
-      )
+      <React.Fragment>
+        <ScrollView pinchGestureEnabled minimumZoomScale={1.0} maximumZoomScale={2.0}>
+          {this.state.images.map(image => (
+            <ImageCard
+              key={image._id}
+              url={image.url}
+              latitude={image.lat}
+              longitude={image.lon}
+              time={image.time}
+            />
+          ))}
+        </ScrollView>
+      </React.Fragment>
     );
   }
 }
-
-// export default () => (
-//   <View style={styles.container}>
-//     <Text>
-//       This is the Discover screen!
-//     </Text>
-//   </View>
-// );
