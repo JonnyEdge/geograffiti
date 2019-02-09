@@ -1,6 +1,8 @@
 import React from 'react';
 import {
   MapView,
+  Location,
+  Permissions,
 } from 'expo';
 import {
   Text,
@@ -23,12 +25,12 @@ const styles = StyleSheet.create({
 class MapScreen extends React.Component {
   constructor(props) {
     super(props);
-
+    const propLocation = props.navigation.getParam('location');
     this.state = {
       markers: null,
       region: {
-        latitude: parseFloat(this.props.location.latitude),
-        longitude: parseFloat(this.props.location.longitude),
+        latitude: propLocation ? propLocation.latitude : null,
+        longitude: propLocation ? propLocation.longitude : null,
         latitudeDelta: 0.0043,
         longitudeDelta: 0.0034,
       },
@@ -40,12 +42,7 @@ class MapScreen extends React.Component {
   };
 
   componentDidMount() {
-    Axios.get(`${server}/images`)
-      .then(res => {
-        this.setState({
-          markers: res.data,
-        });
-      });
+    this._getMarkers();
   }
 
   onPressMarker = (_, marker) => {
@@ -54,6 +51,33 @@ class MapScreen extends React.Component {
       lon: marker.lon,
       image: marker.url,
     });
+  };
+
+  _getLocationAsync = async () => {
+    const { status } = await Permissions.askAsync(Permissions.LOCATION);
+    if (status === 'granted') {
+      const location = await Location.getCurrentPositionAsync({});
+      this.setState({
+        region: {
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+          latitudeDelta: 0.0043,
+          longitudeDelta: 0.0034,
+        },
+      });
+    }
+  };
+
+  _getMarkers = () => {
+    Axios.get(`${server}/images`)
+      .then(res => {
+        this.setState({
+          markers: res.data,
+        });
+        if (!this.state.region) {
+          this._getLocationAsync();
+        }
+      });
   };
 
   _handleRegionChange = mapRegion => {
