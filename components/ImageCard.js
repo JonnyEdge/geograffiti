@@ -1,5 +1,6 @@
 import React from 'react';
-import { Image, View, Text, Dimensions } from 'react-native';
+import { View, Text, Dimensions } from 'react-native';
+import Image from 'react-native-image-progress';
 
 const dimensions = Dimensions.get('window');
 const imageHeight = dimensions.height;

@@ -2,8 +2,11 @@ import React from 'react';
 import {
   StyleSheet,
   View,
+  ActivityIndicator,
 } from 'react-native';
-import { Header } from 'react-native-elements';
+// import {
+//   Header
+// } from 'react-native-elements';
 import {
   Permissions,
   Location,
@@ -21,8 +24,8 @@ const styles = StyleSheet.create({
 
 export default class App extends React.Component {
   state ={
-    fontLoaded: false,
-    location: {},
+    // fontLoaded: false,
+    location: null,
   };
 
   componentDidMount() {
@@ -48,11 +51,12 @@ export default class App extends React.Component {
       // eslint-disable-next-line global-require
       Lobster: require('./assets/fonts/Lobster-Regular.ttf'),
     });
-    this.setState({ fontLoaded: true });
+    // this.setState({ fontLoaded: true });
   };
 
   render() {
     return (
+      this.state.location ? (
       <React.Fragment>
         <View style={styles.container}>
           <MainTabNavigator
@@ -61,7 +65,15 @@ export default class App extends React.Component {
             }}
           />
         </View>
-      </React.Fragment>
+      ) : (
+        <View
+          style={
+                styles.container
+              }
+        >
+          <ActivityIndicator />
+        </View>
+      )
     );
   }
 }

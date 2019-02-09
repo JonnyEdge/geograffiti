@@ -9,6 +9,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import DiscoverScreen from '../screens/DiscoverScreen';
 import AddScreen from '../screens/AddScreen';
 import MapScreen from '../screens/MapScreen';
+import ImageScreen from '../screens/ImageScreen';
 
 const DiscoverStack = createStackNavigator({
   Discover: DiscoverScreen,
@@ -25,13 +26,7 @@ DiscoverStack.navigationOptions = {
 };
 
 const AddStack = createStackNavigator({
-  Add: (props) => {
-    return (
-      <AddScreen
-        navigation={props.navigation}
-      />
-    );
-  },
+  Add: AddScreen,
 });
 
 AddStack.navigationOptions = {
@@ -49,10 +44,17 @@ const MapStack = createStackNavigator({
     return (
       <MapScreen
         location={props.screenProps.location}
-        navigation={props.navigation}
       />
     );
   },
+  Image: (props) => {
+    return (
+      <ImageScreen
+        image={props.screenProps.image}
+      />
+    );
+  },
+  initialRouteName: 'Map',
 });
 
 MapStack.navigationOptions = {

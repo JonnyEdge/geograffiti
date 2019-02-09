@@ -2,12 +2,13 @@ import React from 'react';
 import Axios from 'axios';
 import {
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 import ImageCard from '../components/ImageCard';
 
 export default class DiscoverScreen extends React.Component {
   state ={
-    images: [],
+    images: null,
   };
 
   static navigationOptions = {
