@@ -3,6 +3,8 @@ import Axios from 'axios';
 import {
   ScrollView,
   ActivityIndicator,
+  View,
+  Text,
 } from 'react-native';
 import ImageCard from '../components/ImageCard';
 
@@ -26,19 +28,26 @@ export default class DiscoverScreen extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
-        <ScrollView pinchGestureEnabled minimumZoomScale={1.0} maximumZoomScale={2.0}>
-          {this.state.images.map(image => (
-            <ImageCard
-              key={image._id}
-              url={image.url}
-              latitude={image.lat}
-              longitude={image.lon}
-              time={image.time}
-            />
-          ))}
-        </ScrollView>
-      </React.Fragment>
+      this.state.images ? (
+        <React.Fragment>
+          <ScrollView pinchGestureEnabled minimumZoomScale={1.0} maximumZoomScale={2.0}>
+            {this.state.images.map(image => (
+              <ImageCard
+                key={image._id}
+                url={image.url}
+                latitude={image.lat}
+                longitude={image.lon}
+                time={image.time}
+              />
+            ))}
+          </ScrollView>
+        </React.Fragment>
+      ) : (
+        <View>
+          <Text>Working...</Text>
+          <ActivityIndicator />
+        </View>
+      )
     );
   }
 }
