@@ -3,7 +3,6 @@ import {
   StyleSheet,
   View,
   Button,
-  Image,
   Text,
   ActivityIndicator,
 } from 'react-native';
@@ -11,6 +10,7 @@ import {
   ImagePicker,
 } from 'expo';
 import Axios from 'axios';
+import Image from 'react-native-image-progress';
 
 import {
   server,
