@@ -8,5 +8,6 @@ iOS application built using React Native and Expo. Location-based image uploadin
 - `npm install`
 
 ### Running Expo
-- Will open a new tab in your browser, presenting a QR code which, once scanned, will open the Expo app on your mobile device and load the GeoGraffiti app
 - `expo start`
+
+Will open a new tab in your browser, presenting a QR code which, once scanned, will open the Expo app on your mobile device and load the GeoGraffiti app
