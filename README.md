@@ -1,6 +1,6 @@
 # GeoGraffiti
 
-iOS application built using React Native and Expo. Location-based image uploading, centred around graffiti. Self explanatory once you open the app.
+iOS application built using [React Native](https://facebook.github.io/react-native/), [React Navigation](https://reactnavigation.org/) and [Expo](https://expo.io/). Location-based image uploading, centred around graffiti. Self explanatory once you open the app.
 
 ### Install
 - Fork this repository
